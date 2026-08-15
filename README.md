@@ -34,4 +34,4 @@ The repository deliberately excludes raw observations, RINEX, HDF5, weights, cac
 python3 scripts/public_release_check.py --staged
 ```
 
-The configured pre-commit hook runs the same check. Public publication remains blocked until the license and release checklist receive explicit approval.
+The configured pre-commit hook runs the same check. This repository may be publicly visible, but it is not open source; all rights remain reserved. Every public update must pass the release checklist.

@@ -40,6 +40,6 @@ MC-001 through MC-005 are work to study, verify from first-party sources, teach 
 
 ## MC-006 — Public license, institutional IP, and patent posture
 
-- Background: no license choice, institutional policy, ownership, patent intent, dependency audit, or data-license audit is approved.
-- Options belong to the owner/institution/mentor; Phase 0 does not select MIT, Apache-2.0, or another license.
-- Freeze impact: public GitHub publication remains blocked. This does not block local Phase 1 after Phase 0 acceptance.
+- Owner decision on 2026-08-15: the repository may be publicly visible for personal research management, but it is not open source and remains `All rights reserved`. The existing QQ email may remain in commit metadata.
+- Phase 0 publication scope: infrastructure, governance, tests, and reviewed evidence only. It contains no formal data, scientific model, trained weight, or result.
+- Reopen condition: institutional ownership, patent strategy, dependency licenses, and dataset licenses must be reviewed again before publishing scientific implementation, formal-data-derived material, or results. This later review does not change the present Phase 0 visibility decision.

@@ -4,7 +4,7 @@ Last updated: 2026-08-15 (Asia/Shanghai)
 
 ## Current gate
 
-- Current phase: Phase 0 accepted; Phase 1 entry authorized but not yet started
+- Current phase: Phase 0 accepted; Phase 1 started and is waiting for the user's first learning response
 - Implementation state: independently reviewed through three correction cycles and accepted
 - Formal acceptance: **granted by the controller on 2026-08-15**
 - Phase 1 authorization: **granted for local, step-by-step theory/literature/method-specification work only**
@@ -12,8 +12,8 @@ Last updated: 2026-08-15 (Asia/Shanghai)
 - Model code implemented or migrated: no
 - Training performed: no
 - High-precision reference viewed or used: no
-- Canonical project commits/remotes/pushes: none at the acceptance decision; the controller must create and verify the intentional initial commit
-- GitHub publication: fail-closed pending license/IP decision and the remaining public-release checklist
+- Canonical project commit: `1c30708` created and verified after acceptance
+- GitHub publication: owner-authorized for the reviewed Phase 0 foundation under `All rights reserved`; controller release checks and remote setup are in progress
 
 ## Frozen direction and claim status
 
