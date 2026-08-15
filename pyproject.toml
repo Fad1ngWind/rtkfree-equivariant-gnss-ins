@@ -1,0 +1,15 @@
+[project]
+name = "rtkfree-equivariant-gnss-ins"
+version = "0.0.0"
+description = "Phase 0 governance and safety infrastructure for RTK-free GNSS/INS research"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[tool.unittest]
+start-directory = "tests"
+
+[tool.phase0]
+canonical-windows-path = "E:\\rtkfree-equivariant-gnss-ins"
+canonical-wsl-path = "/mnt/e/rtkfree-equivariant-gnss-ins"
+dependency-policy = "no-third-party-runtime-dependencies-in-phase-0"

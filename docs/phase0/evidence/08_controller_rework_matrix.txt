@@ -1,0 +1,17 @@
+Evidence class: controller-finding remediation map
+Captured: 2026-08-15 Asia/Shanghai
+
+First-review remediation:
+- A1–A4: exact relative paths; root dotfiles; absolute/traversal rejection; broad risk classes and content signatures; staged T; index modes; fail-closed reads/parsing; recursive runtime policy and symlink-chain rejection.
+- A5/A6: tests/reports/evidence expanded to the measured coverage.
+- B1–B6: explicit Python -O health gates, early Python-version error, bytecode suppression, truthful empty lock, retained single-tree ADR, and non-destructive unreachable-object audit.
+- C1–C7: user-frozen route, research charter, corrected Phase 1 study items, direct degeneracy risks, traceability rules, external secrets, and fail-closed license/IP posture.
+
+Second-review narrow remediation:
+- Explicit RTK/PPK matching rejects the marker anywhere in a normalized component. Exact `rtkfree`/canonical-project components alone are exempt; composite dangerous names remain blocked.
+- Runtime tests cover all eight named RTK/PPK config examples plus dangerous path composites.
+- Release classification and real temporary-Git force-add tests cover `rtk_data`, `ppkPath`, root bytecode, and `private_notes`.
+- Candidate scanning derives an additional finding from the repository's actual ignore policy in one NUL-safe batch, including tracked/force-added paths; query failure is tested fail-closed.
+- The suite now has 22 tests, including eight real temporary-Git integrations covering force-add, dotenv, T/symlink, gitlink, read failure, ignore-query failure, and safe candidates.
+- Frozen charter and roadmap now state the exact RINEX→WLS/SPP PVT chain, native-PVT roles, learned-output whitelist, pending hypotheses, post-acceptance commit ownership, official Phase 2 inputs/sealing, Phase 3 reliability, differentiable-ESKF Phase 4, and matched rotation-augmentation Phase 5.
+- Dynamic object counts move to a fresh final snapshot. Evidence 09 is explicitly historical and evidence 07 relies on reachability rather than a fixed object count.

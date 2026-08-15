@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+set -eu
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+export PYTHONPATH="$repo_root/src"
+export PYTHONDONTWRITEBYTECODE=1
+python3 scripts/public_release_check.py --staged

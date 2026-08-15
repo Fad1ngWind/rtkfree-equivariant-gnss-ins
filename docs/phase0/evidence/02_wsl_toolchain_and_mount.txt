@@ -1,0 +1,33 @@
+Evidence class: sanitized read-only WSL transcript
+Captured: 2026-08-15 Asia/Shanghai
+
+Distributions:
+- Ubuntu-24.04: WSL version 2, default
+- Ubuntu: WSL version 2
+
+Normative distribution:
+- Ubuntu 24.04.4 LTS (Noble)
+- kernel: 6.6.87.2-microsoft-standard-WSL2
+- Python: 3.12.3
+- pip: 24.0
+- Git: 2.43.0
+- Make: 4.3
+- GCC/G++: 13.3.0
+- Python venv module: available
+- Python tomllib module: available
+- uv: not found
+- Poetry: not found
+- CMake/Ninja/Node: not found in the Linux tool lookup used by the audit
+
+Canonical-path mapping:
+- Windows: E:\rtkfree-equivariant-gnss-ins
+- WSL: /mnt/e/rtkfree-equivariant-gnss-ins
+- WSL resolved working directory matched the mapping
+
+Mount record:
+- target: /mnt/e
+- source: E:\
+- filesystem: 9p
+- DrvFS options included rw/noatime/cache, but no metadata option
+
+Note: a recurring WSL localhost/NAT warning contained a machine-specific message and was omitted. It did not prevent any audited command or test.

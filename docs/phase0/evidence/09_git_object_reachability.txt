@@ -1,0 +1,21 @@
+Evidence class: historical local Git object/reachability audit
+Captured: 2026-08-15 Asia/Shanghai during the second rework
+
+Historical measurement point:
+- canonical branch commits: 0
+- configured remotes: 0
+- canonical HEAD: unborn main branch
+- an app-owned non-commit tree under `refs/codex/*` existed for local turn capture
+- `git fsck --full --unreachable --no-reflogs` reported five unreachable blobs at that historical point
+- one was the 51-byte plain-text synthetic Phase 0 HDF5-path guard probe; it contained no formal data or secret
+- the others were prior Phase 0 document/attribute versions
+
+This count is not a timeless final count. Restaging superseded files and application captures can create additional unreachable blobs or trees. Evidence 10 records the third-rework measurement; future counts may change again.
+
+Stable reachability conclusion:
+- the synthetic probe is absent from the worktree and index
+- unreachable commits are zero and no publishable branch/tag/remote ref reaches the probe
+- normal explicit branch/tag push does not transfer unreachable local objects
+- public mirror/all-ref pushes are prohibited and `refs/codex/*` must not be published
+
+No destructive `git gc`, prune, reflog deletion, or object removal was attempted.

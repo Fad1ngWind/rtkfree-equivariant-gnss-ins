@@ -1,0 +1,10 @@
+Evidence class: sanitized command transcript
+Captured: 2026-08-15 Asia/Shanghai
+
+PowerShell: 5.1.26100.9168
+Windows Python: 3.9.13
+Python launcher entries: 3.9-64 and 3.7-64
+Git: 2.47.0.windows.2
+WSL executable: present
+
+Conclusion (measured): Windows tools exist, but Windows Python does not satisfy the selected Python 3.12 runtime and is non-normative.

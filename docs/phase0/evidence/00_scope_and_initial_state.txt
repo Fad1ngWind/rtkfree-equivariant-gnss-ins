@@ -1,0 +1,15 @@
+Evidence class: sanitized read-only audit transcript
+Captured: 2026-08-15 Asia/Shanghai
+
+Scope controls applied before writes:
+- New project: <canonical-windows-repo>
+- Old Windows and WSL projects: read-only historical evidence only
+- No formal-data download, model implementation, training, final-reference access, GitHub publication, commit, or push
+
+Initial new-directory observations:
+- resolved path: E:\rtkfree-equivariant-gnss-ins
+- directory entries: none
+- git status: fatal, not a Git repository
+- AGENTS.md found in project tree: none
+
+Conclusion (measured): implementation began from an empty non-Git directory.

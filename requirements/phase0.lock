@@ -1,0 +1,5 @@
+# Verified Phase 0 dependency closure: empty.
+# All health checks, guards, and tests use Python 3.12 standard-library modules.
+# This is not a lock for future scientific dependencies. Phase 1 must select a
+# resolver, resolve online from an approved index, record hashes/platform, and
+# commit the resolver-generated lock before adding scientific code.

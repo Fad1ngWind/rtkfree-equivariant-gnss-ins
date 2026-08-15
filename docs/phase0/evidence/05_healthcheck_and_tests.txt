@@ -1,0 +1,36 @@
+Evidence class: sanitized rework verification transcript
+Captured: 2026-08-15 Asia/Shanghai
+Normative command: bash scripts/healthcheck.sh
+Runtime: Ubuntu-24.04 at /mnt/e/rtkfree-equivariant-gnss-ins
+
+Explicit optimized health gate:
+PASS python=3.12.3 optimized=True
+PASS package=rtkfree-equivariant-gnss-ins version=0.0.0
+PASS phase0_schema=1 phase=0 status=ready_for_controller_review allowed=true
+PASS formal_data_enabled=false training_enabled=false
+PASS deployable_sources=frozen_exact_match
+PASS third_party_runtime_dependencies=0
+
+Unit/integration tests after rework:
+- policy/path/config tests: 7 passed
+- candidate classification/content/mode tests: 7 passed
+- real temporary-Git integration tests: 8 passed
+- total: 22 passed, 0 skipped, 0 failed
+
+Integration coverage includes force-add, root dotenv variants, classic/compressed RINEX names, HDF extension/magic, weights, explicit RTK/PPK aliases, ignored bytecode/private-note paths, safe staged candidates, staged type change to symlink, gitlink, a missing-worktree-file read failure, and fail-closed ignore-query failure. Temporary repositories used synthetic bytes only under ignored `.phase0_tmp` and self-cleaned.
+
+Full candidate result:
+PASS public-release guard: tracked and unignored candidates contains no recognized high-risk files
+Overall exit code: 0
+
+Windows negative runtime check:
+- command: Windows Python 3.9.13 scripts/healthcheck.py
+- result: explicit “Non-normative runtime ... Python 3.12 is required” before tomllib import
+- exit code: 1 (expected)
+
+Failure history retained:
+1. Original Phase 0 run exposed a literal synthetic private-key header in test source; runtime assembly fixed self-detection.
+2. First rework run found a test-helper signature error.
+3. Next run caught the scanner's own contiguous RINEX-header test signature; runtime assembly fixed it.
+4. A 21-test run found an over-strong expectation that content-only signatures must also be filename-ignored; the assertion now distinguishes ignore coverage from content scanning.
+5. The third review identified explicit RTK/PPK substring and force-added-ignore drift; the recorded final run passed all 22 tests and the full candidate scan after both fixes.

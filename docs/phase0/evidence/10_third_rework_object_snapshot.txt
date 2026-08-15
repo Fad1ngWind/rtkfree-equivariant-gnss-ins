@@ -1,0 +1,22 @@
+Evidence class: third-rework dynamic Git object snapshot
+Captured: 2026-08-15 Asia/Shanghai at final 50-file restaging
+
+Command: git fsck --full --unreachable --no-reflogs
+
+Measured counts at this point:
+- unreachable blobs: 45
+- unreachable trees: 12
+- unreachable commits: 0
+- publishable branch/tag/remote commits: 0
+- configured remotes: 0
+- app-owned refs under `refs/codex/*`: 3
+- historical synthetic probe hash reported unreachable: yes
+
+Interpretation:
+- superseded staging versions and app snapshots explain why blob/tree counts increased from the historical evidence 09 measurement
+- counts may change again as the app captures state; they are observations, not acceptance invariants
+- the invariant is reachability: the synthetic probe is absent from worktree/index and no branch, tag, or remote commit reaches it
+- normal explicit branch/tag push cannot include unreachable objects; mirror/all-ref publication is prohibited
+- unreachable commits remain zero
+
+No garbage collection, pruning, ref deletion, commit, remote, or push was performed.

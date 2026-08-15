@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "phase": 0,
+  "status": "accepted",
+  "runtime": {
+    "python": "3.12",
+    "platform": "Ubuntu-24.04-on-WSL2"
+  },
+  "deployable_sources": [
+    "reproducible_conventional_wls_spp_pvt",
+    "low_cost_imu"
+  ],
+  "formal_data_enabled": false,
+  "training_enabled": false
+}

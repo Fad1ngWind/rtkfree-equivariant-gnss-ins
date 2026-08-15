@@ -1,0 +1,45 @@
+Evidence class: final proposed-scope review after controller rework
+Captured: 2026-08-15 Asia/Shanghai
+
+Canonical Git/index state:
+- branch: unborn main
+- reachable branch/tag/remote commits: 0
+- remotes: 0
+- proposed scope: 50 staged additions
+- unstaged/untracked changes: 0
+- ignored residue/cache: 0
+- staged diff: 2,264 insertions
+- staged whitespace check: pass
+
+Worktree and index review:
+- non-.git files: 50
+- files over 5 MiB: 0
+- largest file: 12,014 bytes
+- recognized forbidden data/model/secret/archive extensions: 0
+- unsupported index modes: 0
+- executable mode 100755: hook plus four command-entry scripts
+- symlink mode 120000: 0
+- gitlink mode 160000: 0
+
+Final Ubuntu-24.04 verification:
+- optimized Python 3.12.3 health gate: pass
+- schema/phase/pending-status/disabled-flags/exact-sources/empty-dependencies/version: pass
+- unit and real temporary-Git integration tests: 22 passed, 0 skipped, 0 failed
+- full tracked/unignored candidate scan: pass
+- real pre-commit exact staged blob/mode scan: pass
+- independent `python3 -B ... --staged` scan: pass
+
+Boundary review:
+- no formal data, raw navigation observation, RINEX/HDF content, trained weight, environment, cache, runtime log, secret, private chat, archive, legacy code/model/config/result, or large binary is a candidate
+- no old project was written
+- no canonical commit, remote, or push exists
+- no formal data or secret was ever used as an adversarial probe
+
+Object-store review:
+- the historical five-blob measurement belongs only to evidence 09; final restaging and app captures can create additional superseded blobs or trees
+- current unreachable blob/tree/commit counts are recorded as a measurement snapshot in evidence 10 and are allowed to change with later app snapshots
+- the synthetic probe is absent from worktree, index and all reachable commits/proposed history
+- no destructive GC/prune was used; normal explicit branch/tag push does not transfer unreachable blobs
+- app-owned `refs/codex/*` may exist and public mirror/all-ref pushes are prohibited
+
+Result: the exact staged proposal is ready for controller review; Phase 0 remains formally unaccepted.

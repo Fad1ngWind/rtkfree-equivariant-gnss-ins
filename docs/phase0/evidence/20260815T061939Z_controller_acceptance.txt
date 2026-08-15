@@ -1,0 +1,34 @@
+Controller acceptance record
+UTC record time: 2026-08-15T06:19:39Z
+Decision: ACCEPTED
+
+Scope independently reviewed by the controller:
+- the canonical repository and WSL execution mapping
+- the staged 51-file clean-room Phase 0 proposal, including this acceptance record
+- the frozen Phase 0-7 route and research-method boundaries
+- runtime information isolation and exact staged-candidate publication controls
+- handoff, evidence index, risks, consultations, and release gates
+
+Final controller regression after setting accepted status and staging all acceptance changes:
+- `bash scripts/healthcheck.sh`: PASS
+- Python: 3.12.3, optimized validation active
+- unit/integration tests: 22/22 PASS
+- full candidate scan: PASS
+- exact staged scan and pre-commit hook: PASS
+- `git diff --cached --check`: PASS
+- exact candidate: 51 files, 2,283 insertions, only regular/executable file modes
+- no canonical branch commit, remote, tag, unstaged/untracked candidate, or ignored residue
+- Codex application-internal `refs/codex/*` exist locally and are explicitly excluded from any future public push
+
+Acceptance boundaries:
+- no legacy code/model/configuration/result was copied
+- no formal dataset was downloaded or processed
+- no model was implemented or trained
+- no high-precision trajectory was viewed or used
+- local Phase 1 theory/literature/method-specification work is authorized
+- public GitHub publication remains blocked by the unresolved license/IP decision and remaining release checklist
+
+Accepted residual risks:
+- DrvFS does not provide POSIX permission isolation and is not yet validated for representative training I/O
+- publication guards are defense in depth, not a substitute for controller review
+- scientific dependencies, official data facts, WLS/SPP implementation, and scientific hypotheses remain unverified future-phase work

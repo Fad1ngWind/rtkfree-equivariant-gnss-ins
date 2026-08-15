@@ -1,0 +1,28 @@
+Evidence class: sanitized read-only historical audit
+Captured: 2026-08-15 Asia/Shanghai
+
+Old Windows project facts:
+- location audited read-only: E:\gnss_ins_equivariant
+- not a Git repository
+- top level mixed src/scripts/config/data/docs/notebooks with private AI conversation records
+- requirements file used minimum-version constraints and had no accompanying lock
+- governance documents existed (project state, decision log, risk and experiment registers)
+
+Old WSL project facts:
+- location audited read-only: /home/<redacted-user>/projects/gnss_ins_equivariant
+- Git branch state reported main tracking origin/main with no short-status changes
+- top level included src/config/data/outputs/artifacts/legacy/notes
+- environment files found: requirements.txt and .gitignore; no pyproject/uv.lock/poetry.lock/environment.yml found in the audited depth
+- ignore rules covered common data, weights, runs, secrets, chats, and archives
+- dependency list used lower bounds, not a resolved hash lock
+
+Reusable facts only:
+1. Keep governance records and phase gates.
+2. Separate formal data, outputs, secrets, private chats, and legacy material from public source.
+3. A lower-bound requirements list is not a reproducible lock.
+4. Preserve explicit retirement/provenance rules for historical outcomes.
+
+Clean-room boundary:
+- no legacy source, model, configuration, artifact, output, or dependency file was copied
+- headings/file structure and environment-policy facts were used only to identify governance and isolation failure modes
+- legacy performance values were neither imported nor registered as a new-project baseline

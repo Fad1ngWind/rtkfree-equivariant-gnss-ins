@@ -1,0 +1,45 @@
+Evidence class: synthetic adversarial coverage summary
+Captured: 2026-08-15 Asia/Shanghai
+
+No formal data, secret, private conversation, model, or trained weight was used. Test payloads are synthetic text or short signature bytes.
+
+Path validation coverage:
+- preserves and blocks root `.env`, `.env.local`, and `.ENV`; allows `.env.example`
+- rejects absolute Windows/POSIX paths, dot components, and `..` traversal
+- accepts the canonical project component `rtkfree-equivariant-gnss-ins`
+
+Environment/cache coverage:
+- `.venv`, `venv`, `env`, `site-packages`, `__pycache__`, `.pyc`
+- pytest/mypy/ruff/tox/nox/Jupyter checkpoint caches
+
+Data/reference coverage:
+- RINEX 2-style names, RINEX/compact-RINEX extensions, compressed containers, observation/navigation/precise clock/orbit/receiver forms
+- HDF/HDF5 extensions and HDF5 magic content
+- RINEX header content signature (assembled in tests so repository source does not contain the contiguous signature)
+- `.pos`, RTK result aliases, ground-truth/high-precision/post-processed/reference-trajectory snake/kebab/camel/compact forms
+- any explicit RTK/PPK component or config marker regardless of prefix/suffix/camel/snake/kebab form; only exact reviewed `rtkfree` names are exempt, and composite `rtkfree_rtk_data` is rejected
+
+Weight/serialization and private-material coverage:
+- common neural weights and model formats
+- pickle/joblib-style serialization
+- logs, backups, archives, secret-key forms, private chat and unreviewed paths
+
+Git integration coverage:
+- risk paths verified ignored where filename rules apply, then force-added and rejected from exact staged blobs
+- one NUL-safe batch `git check-ignore --no-index -z --stdin` query applies the repository ignore policy even to tracked/force-added paths; query failure blocks the repository scan
+- real force-add cases include `module.pyc`, `private_notes/chat.md`, `rtk_data/route.txt`, and `ppkPath/route.txt`
+- root dotenv force-add rejected
+- staged `T` change from regular file to symlink rejected by mode `120000`
+- synthetic gitlink rejected by mode `160000`
+- missing worktree file produced a fail-closed read finding
+- safe regular staged source produced zero findings
+
+Runtime policy coverage:
+- snake/kebab/camel/compact high-precision markers rejected recursively
+- explicit `useRTK`, `rtkEnabled`, `rtkDataRoot`, `rtkLoss`, `ppkPath`, `ppkTrajectory`, `ppkDataRoot`, and `ppkLoss` config examples rejected
+- Mapping, list/tuple/set and PathLike handled
+- unknown leaves, non-text keys, cycles and non-finite values fail closed
+- raw and resolved paths inspected; any symlink chain rejected
+- no sealed-reference override exists
+
+All temporary repositories and files self-cleaned. No destructive Git garbage collection was performed.

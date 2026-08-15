@@ -1,0 +1,22 @@
+Evidence class: measured, self-cleaning write probe inside the new project only
+Captured: 2026-08-15 Asia/Shanghai
+Command: python3 scripts/probe_wsl_mount.py (from Ubuntu-24.04)
+
+{
+  "case_alias_exists": true,
+  "chmod_after_requested_0600": "0o777",
+  "chmod_before": "0o777",
+  "root": "/mnt/e/rtkfree-equivariant-gnss-ins",
+  "sequential_write_mib": 8,
+  "sequential_write_mib_per_second": 78.34,
+  "sequential_write_seconds": 0.1021,
+  "symlink_created": true,
+  "symlink_resolves": true
+}
+
+Interpretation:
+- measured: the mapped tree is case-insensitive for the probe name
+- measured: chmod did not narrow the reported permission bits
+- measured: WSL symlink creation/resolution worked
+- measured: one 8 MiB synchronous sequential write achieved the recorded rate
+- limitation: this is not a representative training, metadata-heavy, concurrent, read, or WSL-ext4 comparison benchmark
