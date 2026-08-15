@@ -1,0 +1,28 @@
+Phase 0 public repository confirmation
+UTC record time: 2026-08-15T06:48:20Z
+
+Repository:
+- URL: https://github.com/Fad1ngWind/rtkfree-equivariant-gnss-ins
+- visibility: PUBLIC
+- license posture: All rights reserved; public visibility is not an open-source grant
+- default branch: main
+- synchronized main before this confirmation record: 249e1f57796cfd06b829e4631f6643a13c9d0f27
+
+Pre-publication verification:
+- canonical WSL healthcheck: PASS, 22/22 tests
+- full-candidate and exact-staged release guards: PASS
+- Gitleaks 8.30.1 official Linux x64 archive SHA-256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb, verified
+- Gitleaks worktree scan: no leaks found
+- Gitleaks HEAD history scan: 2 commits scanned, no leaks found
+- tracked modes: 100644 and 100755 only
+- largest tracked file before publication: approximately 12 KB; no worktree file over 1 MB outside .git
+- only main was pushed; refs/codex/* and all other local refs were excluded
+
+Post-publication verification:
+- remote visibility: PUBLIC
+- remote default branch: main
+- pull requests required, stale reviews dismissed, administrators included
+- linear history and conversation resolution required
+- force-push and branch deletion disabled
+
+Published scope remains limited to the accepted Phase 0 foundation. It contains no formal data, RINEX, HDF5, model weight, scientific model, training result, high-precision trajectory, secret, private chat, or legacy source code.

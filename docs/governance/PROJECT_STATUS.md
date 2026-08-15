@@ -12,8 +12,8 @@ Last updated: 2026-08-15 (Asia/Shanghai)
 - Model code implemented or migrated: no
 - Training performed: no
 - High-precision reference viewed or used: no
-- Canonical project commit: `1c30708` created and verified after acceptance
-- GitHub publication: owner-authorized for the reviewed Phase 0 foundation under `All rights reserved`; controller release checks and remote setup are in progress
+- Canonical project history: the accepted Phase 0 foundation and public-repository policy are committed and synchronized
+- GitHub publication: `https://github.com/Fad1ngWind/rtkfree-equivariant-gnss-ins` is public under `All rights reserved`; protected `main` is the default branch
 
 ## Frozen direction and claim status
 

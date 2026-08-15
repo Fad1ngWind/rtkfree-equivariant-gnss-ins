@@ -16,7 +16,7 @@ Before the first public push and every release:
 - [x] Documentation distinguishes measured facts, frozen policy, and assumptions.
 - [x] No scientific result is included; result-to-experiment mapping is not applicable to this Phase 0 publication.
 - [x] Remote `https://github.com/Fad1ngWind/rtkfree-equivariant-gnss-ins` is verified empty and `PUBLIC` before the first push.
-- [ ] Configure and verify `main` branch protection immediately after the initial synchronization creates the branch; an empty repository has no branch to protect before that push.
+- [x] `main` branch protection is verified after the initial synchronization: pull requests, stale-review dismissal, administrator enforcement, linear history, and conversation resolution are enabled; force-push and deletion are disabled.
 - [x] Only the explicitly reviewed `main` branch will be pushed; `--mirror`, `--all`, and internal `refs/codex/*` are prohibited.
 - [x] This is the initial repository publication, not a numbered scientific release; the accepted Phase 0 commit and empty dependency lock are recorded, while changelog, release tag, and data-manifest hash are not applicable.
 
