@@ -12,3 +12,5 @@ Before any future contribution:
 6. Do not publish or open a pull request until the controller approves the current phase and license.
 
 Scientific-method changes require an experiment-registration update before execution. Any change after a sealed final evaluation invalidates that route as an untouched final test route.
+
+Public-facing README and repository presentation changes must follow `docs/governance/PUBLIC_REPOSITORY_STYLE.md`.
