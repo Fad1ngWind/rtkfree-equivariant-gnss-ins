@@ -16,6 +16,7 @@ Evidence is small, text-only, sanitized, and independent of formal data or high-
 | Old synthetic probe is unreachable and not publishable history | measured | `evidence/09_git_object_reachability.txt` | `git fsck`; refs/commit/remote review |
 | Current post-restaging unreachable blob/tree/commit counts | measured snapshot | `evidence/10_third_rework_object_snapshot.txt` | rerun `git fsck`; counts may grow with superseded/app snapshots |
 | Controller independently re-ran the final gates and formally accepted Phase 0 | measured decision | `evidence/20260815T061939Z_controller_acceptance.txt` | controller-only gate decision |
+| Accepted Phase 0 foundation was scanned and synchronized to protected public `main` | measured publication | `evidence/20260815T064820Z_publication_confirmation.txt` | GitHub visibility, branch and protection review |
 | Scientific charter and exact Phase 0–7 route are frozen | policy | `../governance/FROZEN_RESEARCH_CHARTER.md`, `../governance/ROADMAP_AND_GATES.md` | document review |
 | MC-001–005 belong inside Phase 1 and license/IP remains unresolved | policy/pending | `../governance/MENTOR_CONSULTATIONS.md` | controller/mentor review |
 | Degeneracy, leakage and observability risks map to direct gates | policy/pending tests | `../governance/RISK_REGISTER.md` | Phase 1 specification review |
