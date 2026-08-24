@@ -15,6 +15,8 @@ Raw per-satellite observations may exist in a controlled data layer in later pha
 
 RTK/PPK/post-processed or otherwise high-precision trajectories must not enter network inputs, losses, pseudo-labels, filter updates, preprocessing choices, training or tuning, early stopping, model selection, architecture selection, random-seed selection, split decisions, or paper-assumption changes.
 
+This prohibition includes a supposedly diagnostic supervised oracle trained on high-precision trajectories, an oracle checkpoint or hyperparameter ranking, and any use of sealed-reference error to define or re-weight the deployable-only selection score. Such an oracle is not an admissible formal baseline or upper bound.
+
 Derived values or metadata that encode such a reference are prohibited to the same extent as the original reference. Renaming or aggregating reference information does not make it deployable.
 
 ## Physical isolation
@@ -35,4 +37,6 @@ Derived values or metadata that encode such a reference are prohibited to the sa
 
 ## Final sealed evaluation
 
-Access is permitted only after the method, code, configuration, data splits, random-seed selection rule, and paper assumptions are recorded in an immutable freeze manifest and independently approved. Phase 0 does not define an executable bypass. Phase 6 must add a reviewed, separate final-evaluation interface before Phase 7.
+Access is permitted only after the method, code, configuration, data splits, random-seed selection rule, statistical unit, metrics, reference validity/uncertainty rules, and paper assumptions are recorded in an immutable freeze manifest and independently approved. Phase 0 does not define an executable bypass. Phase 6 must add a reviewed, separate final-evaluation interface before Phase 7.
+
+Reference-error ranking may be computed after opening the sealed evaluation only as a pre-registered post-hoc diagnostic of the already frozen RTK-free selection rule. It cannot revise a method, model, seed, score, threshold, metric, validity mask, or claim. If it influences any later choice, the affected route is development data and a new untouched route is required for formal evaluation.
