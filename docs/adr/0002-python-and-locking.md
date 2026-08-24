@@ -7,7 +7,7 @@
 
 Use Ubuntu-24.04 Python 3.12 as the only normative runtime. Phase 0 uses no third-party runtime package. The empty `requirements/phase0.lock` is the complete verified Phase 0 dependency closure, not a forecast of scientific dependencies.
 
-The Windows Python 3.9 installation is not supported for reproducible project execution. No online resolution is needed for Phase 0. Phase 1 must select a resolver and create a real platform-scoped, hash-bearing lock before any third-party scientific import.
+The Windows Python 3.9 installation is not supported for reproducible project execution. No online resolution is needed while the project has no third-party runtime dependency. The first later Phase that introduces a third-party scientific import must select a resolver and create a real platform-scoped, hash-bearing lock before adding that import.
 
 ## Rationale
 

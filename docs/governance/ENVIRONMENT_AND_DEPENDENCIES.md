@@ -12,7 +12,7 @@
 
 Python is constrained to `>=3.12,<3.13` and `.python-version` records 3.12. Phase 0 has no third-party runtime dependencies, so `requirements/phase0.lock` truthfully records an empty closure and all checks use the standard library.
 
-Phase 1 must not hand-edit a pretend scientific lock. Before adding a third-party import it must:
+No Phase should hand-edit a pretend scientific lock. Before the first later Phase adds a third-party import, it must:
 
 1. choose and record one resolver/lock format in a new ADR;
 2. resolve from an approved index with network access;
@@ -24,4 +24,4 @@ A virtual environment should live on WSL-native storage outside the repository. 
 
 ## Not yet verified
 
-No scientific library, CUDA stack, GPU, lock resolver, editable package installation, or offline wheelhouse has been validated. These are Phase 1 prerequisites, not Phase 0 claims.
+No scientific library, CUDA stack, GPU, lock resolver, editable package installation, or offline wheelhouse has been validated. These are prerequisites for the first dependency-bearing implementation Phase, not Phase 1 documentation work.

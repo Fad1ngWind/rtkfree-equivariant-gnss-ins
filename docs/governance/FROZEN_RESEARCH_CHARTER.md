@@ -1,65 +1,64 @@
 # Frozen research charter
 
-Status: policy-frozen research boundary for Phase 0 review. Scientific claims remain unverified.
+Status: policy-frozen boundary after the 2026-08-24 mentor/controller architecture reconciliation. Scientific claims remain unverified.
 
-## Claim and information boundary
+## Research claim and information boundary
 
-The core hypotheses are all pending verification: improved robustness under urban GNSS degradation; generalization across installation orientation, route, scene, and receiver; and calibrated uncertainty. None is a conclusion. The project must not claim superiority over SPP, conventional filtering, or any learned baseline until the pre-registered phase gates support that claim.
+The project studies GNSS/INS learning without high-precision trajectory supervision. RTK, PPK, post-processed high-precision trajectories, and any derived proxy are prohibited from training, normalization, tuning, early stopping, architecture or seed selection, pseudo-label generation, filtering updates, and data partition decisions.
 
-Training, tuning, early stopping, architecture choice, model/seed selection, pseudo-labels, filtering updates, or loss design must not use RTK, PPK, post-processed high-precision trajectories, or any derived proxy. Preferred terminology is “without high-precision trajectory supervision” or precisely defined “RTK-free learning.” Direct SPP fitting is not purely unsupervised.
+Preferred wording is “without high-precision trajectory supervision” or precisely defined “RTK-free learning.” The method uses real-time ESKF pseudo-labels and is therefore weakly supervised, not completely unsupervised.
 
-## Frozen main information chain
+RTK or another approved high-precision reference may be opened only after the method, code, configuration, splits, seeds, metrics, and claims are frozen. Any method change after viewing the result invalidates the affected route as a formal test route.
 
-The primary chain begins with low-cost-receiver RINEX and uses a frozen, reproducible, independently validated conventional WLS/SPP implementation to generate standardized PVT. Its contract includes time, solution status, satellite count, DOP, covariance, and all available reproducible quality statistics, together with the conventionally available position/velocity state. Low-cost IMU is the other primary source.
+## Primary method
 
-Receiver-native PVT is used for cross-checking, as an external comparator for the independently computed SPP, and for cross-receiver generalization tests. It is not the canonical main-chain target. Raw per-satellite observations remain in a controlled audit/future-extension layer. The main line does not pre-commit to tight coupling, a Set Transformer, or learned raw-observation processing.
+The deployable sources are low-cost IMU and a conventional, reproducible WLS/SPP PVT stream with time, validity, covariance, and available quality fields. Receiver-native PVT is a comparator. Raw per-satellite observations remain available for audit and a possible later extension.
 
-The explicit loosely coupled ESKF remains responsible for the final position, velocity, attitude, and covariance. Direct absolute-position regression from IMU plus SPP is not the default architecture and cannot silently replace the ESKF.
+A frozen real-time forward GNSS/INS ESKF generates weak pseudo-labels during training and serves as the conventional baseline. It cannot use smoothing, future data, or high-precision information. The deployed PINN does not read teacher states or covariance and directly produces the final causal navigation state.
 
-## Candidate output boundaries and identification order
+The primary method is loose coupled. It uses standardized PVT and IMU, maintains a recursive position/velocity/attitude state around an explicit inertial propagation reference, and is not a black-box regression from IMU plus absolute coordinates to position. Route, file, device, timestamp identity, and other memory shortcuts are prohibited learned inputs.
 
-Candidate IMU-side learned outputs are limited to constrained bias corrections, motion increments, process-noise scales, or an inertial prior with its covariance; every output requires explicit frames, units, bounds, and an ESKF insertion point. Candidate GNSS-side learned outputs are limited to bounded measurement covariance `R`, robust weights, or anomaly probabilities. Learned PVT corrections, absolute-position corrections, and common-bias corrections are prohibited. Neither branch may expose a hidden absolute-trajectory target or bypass the explicit filter.
+Tight coupling is not a Phase 1–5 requirement. It requires verified raw observations, a stable loose-coupled result, a separate ADR, and a new fair comparison plan.
 
-Identification proceeds in this order:
+## Minimal learning sequence
 
-1. Hold IMU bias/process assumptions fixed and learn only measurement covariance `R` or equivalent weights.
-2. Establish an ordinary non-equivariant IMU model plus a genuinely independent PINN residual.
-3. Introduce gravity-aware equivariance and compare at matched capacity.
-4. Only after the parts are separately identifiable may joint `Q`/`R`/bias adaptation be considered.
+1. Prove the deterministic WLS/SPP, INS, and ESKF chain first.
+2. Build one ordinary non-equivariant loose-coupled mean-state student using the frozen forward ESKF teacher.
+3. Add one genuinely independent inertial physics residual and compare with the same model without that residual.
+4. Replace the ordinary IMU representation with a capacity-matched gravity-preserving `SO(2)` representation and compare with ordinary and rotation-augmented controls.
+5. Only after mean-state behavior is stable may predictive covariance or another optional component be added.
 
-A PINN term must express a separately stated physical residual with units, discretization, and assumptions. It must not rename the same mechanization identity already executed by the ESKF.
+Joint free learning of `Q`, `R`, bias, robust rejection, and state correction is outside the first implementation. Any later addition must have a specific identifiable role and a single-factor comparison.
+
+## Physics boundary
+
+The physics loss must act on a network-predicted state that is not algebraically defined as the same mechanization result. Its frame, units, discretization, validity conditions, and data dependencies must be explicit.
+
+If a state is defined as mechanization plus a learned correction, then a residual equal to that correction is a correction prior, not independent evidence that a PINN learned inertial dynamics. GNSS innovation likelihood is a statistical loss and cannot be renamed as inertial physics.
 
 ## Symmetry boundary
 
-Gravity-preserving `SO(2)` yaw symmetry is the preferred starting point. `O(2)` may be considered only after reflections are defined correctly, including the pseudovector transformation of angular velocity. `SO(3)` or any larger group requires an explicit gravity/frame justification and transformation tests; the word “equivariant” alone is not a method specification.
+Gravity-preserving yaw `SO(2)` is the only primary symmetry. Phase 1 defines the group action; Phase 5 implements and numerically tests it. `O(2)`, `SO(3)`, reflection handling, alternative invariant filters, and additional groups are deferred unless the primary comparison reveals a concrete need.
 
-## Causal GNSS branch comparison
+A mathematical coordinate-equivariance property test and a real sensor-remounting generalization experiment are different claims. The first is mandatory for an equivariance claim; the second is conditional on suitable data.
 
-Rule-based quality handling, TCN/GRU, and a lightweight causal Transformer must be compared under the same deployable inputs, latency, capacity, and selection protocol. The Transformer is retained only if it gives stable independent benefit. It is not a default contribution.
+## Evaluation boundary
 
-## Observability and mandatory degeneracy tests
+The two mentor-defined questions are:
 
-A constant common SPP bias may be unobservable without independent absolute information. The method and paper must state this limit rather than imply recovery by architecture alone.
+1. Does the method improve 20-second and 30-second controlled GNSS outages over the same-state pure-IMU bridge?
+2. With GNSS available, does it improve urban-degraded positioning over the identical forward ESKF, while SPP remains reported?
 
-Every applicable baseline and learned model must be directly tested for:
+Route/session separation, common initialization, causal masking, multiple fixed seeds, and reporting failures are required. Exact numerical margins, sample counts, architecture sizes, training steps, and statistical procedures are not frozen in Phase 1 before the official data and compute budget are known. They must be fixed without reference-error influence before the relevant experiment.
 
-1. copying SPP rather than fusing information;
-2. inflating covariance without improving calibrated uncertainty;
-3. rejecting all GNSS updates;
-4. compensating among `Q`, `R`, and bias so parameters lose identifiable meaning;
-5. memorizing routes, receivers, timestamps, or environment identity; and
-6. direct or derived high-precision/data-split leakage.
+A constant common SPP bias may be unobservable without independent absolute information. The project must state this limitation and cannot promise architecture-only absolute de-biasing.
 
-These are gate tests, not optional discussion points.
+## Scope control
 
-## Literature and novelty boundary
+An item enters a phase gate only if it directly tests the mentor-defined hypothesis, is necessary for mathematical/implementation correctness, or prevents leakage or an invalid conclusion. Otherwise it is placed in a non-blocking backlog.
 
-EqNIO, PINK-GINS, and AutoW are user-provided historical boundary markers only. Phase 1 must retrieve and read then-current first-party papers and official materials before fixing theory, comparisons, or novelty language. Weight learning, PINN constraints, or PINN plus GNSS/INS cannot by themselves support a priority or “first” claim.
+Conditional extensions never block the primary method. A Phase may not freeze exact hyperparameters that depend on data fields, hardware, or a working baseline owned by a later Phase.
 
-## Dataset boundary
+## Literature boundary
 
-UrbanNav version, license, scenario/route identifiers, sensor contents, and official download source must be re-confirmed in Phase 2 from official sources. Phase 0 downloads nothing and makes no dataset-compatibility claim.
-
-## Freeze consequence
-
-Phase 1 turns this charter into a first-party-literature-backed method specification with the user learning and judging each decision step by step. Later implementation may not change these boundaries silently; any change requires an ADR, experiment-registry impact assessment, and controller gate review. After a sealed final result is viewed, a method change invalidates that route as a formal test route.
+EqNIO, PINK-GINS, AutoW, and newer first-party work define prior-art boundaries. Equivariant inertial learning, PINN plus GNSS/INS, ESKF pseudo-label learning, or GNSS weighting cannot individually support a priority claim. Novelty remains a candidate combination claim until the first-party search and experiments are complete.

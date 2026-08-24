@@ -1,47 +1,59 @@
-# Frozen Phase 0–7 roadmap and gates
+# Phase 0–7 roadmap and gates
 
-This order is user-frozen. No phase starts until the controller accepts the preceding gate. Later descriptions are plans, not completed work. The scientific constraints are in `FROZEN_RESEARCH_CHARTER.md`.
+The phase order is fixed. Each phase has one primary question and a small mandatory gate. Conditional extensions are recorded but do not block progress.
 
 ## Phase 0 — infrastructure and governance
 
-Deliver one canonical source tree; reproducible WSL entry; truthful environment/locking strategy; local Git safety; clean-room boundary; executable runtime and publication guards; frozen charter; evidence-backed handoff. During executor work and before controller acceptance: no formal data, model, training, commit, remote, or public release. After formal acceptance, the controller—not the Phase 0 executor—updates the research notes, creates the intentional initial commit, and synchronizes only through the license/IP and public-release gates.
+Establish one canonical repository, WSL execution, environment strategy, Git safety, information isolation, minimal package structure, tests, and evidence conventions.
 
-## Phase 1 — theory, first-party literature, and method specification
+Gate: accepted and complete. No formal data, model, or training was introduced.
 
-With the user learning and judging decisions step by step, retrieve then-current first-party sources and freeze: state and observation definitions; frames/coordinates/units/time; group action; network inputs/outputs and causal boundaries; genuinely independent PINN residuals; self-/weak-supervised losses with exact signals; information policy; observable and degenerate solutions; pre-registered ablations; success/failure criteria; and development/final evaluation protocol.
+## Phase 1 — theory, literature, and minimal method specification
 
-Gate: MC-001 through MC-005 are resolved through documented Phase 1 study and decisions; no formal-data implementation or high-precision influence occurs. These items do not need answers before Phase 1 starts, but Phase 1 cannot pass without them.
+Freeze only what is needed to implement the first scientific baseline: claim wording; state and frames; causal PVT/IMU inputs; real-time forward ESKF teacher role; PINN final-state role; one non-tautological inertial physics residual; `SO(2)` action; the two mentor-defined hypotheses; minimal baselines/ablations; and the sealed-reference rule.
 
-## Phase 2 — official data and standardized WLS/SPP
+Phase 1 does not freeze WLS constants before data inspection, network widths/depths, optimizer budgets, large statistical matrices, tight coupling, or a full covariance architecture.
 
-Acquire official RINEX, IMU, and calibration material only after confirming dataset version, license, scenario/route IDs, sensor contents, and official download source. Record provenance, license, cryptographic hashes, route-level splits, and time/frame/unit contracts. Physically seal RTK or other high-precision reference away from deployable data and ordinary environments. Build the controlled raw-observation layer and independently reproducible conventional WLS/SPP standardized PVT stream including time, solution status/state, satellite count, DOP, covariance, and available quality statistics.
+Gate: the user can explain the information flow and physics residual; the first-party evidence matrix covers the closest prior work; the concise method specification has no unresolved architecture contradiction. No formal data or model implementation occurs.
 
-Gate: deterministic deployable pipeline, immutable split/provenance manifests, leakage review, and WLS/SPP reproducibility tests pass. UrbanNav facts are re-confirmed rather than inherited.
+## Phase 2 — official data and conventional WLS/SPP
 
-## Phase 3 — conventional baselines
+Confirm official source, license, routes, sensor fields, calibration, timing, and reference availability. Create route/session-level splits, hash manifests, and physical separation of the high-precision reference. Implement and independently check the conventional WLS/SPP PVT stream.
 
-Implement and freeze SPP-only, INS-only, fixed loosely coupled ESKF, and rule-adaptive ESKF baselines. The explicit ESKF outputs position, velocity, attitude, and covariance. Use both synthetic fixtures and approved real deployable data to demonstrate that the navigation chain is numerically and operationally reliable before learned methods.
+This phase owns signal selection, WLS corrections/weights, validity/FDE behavior, timing assumptions, and output covariance because those choices depend on the actual data interface.
 
-Gate: state/error equations, numerical tests, timing, covariance and failure criteria are auditable; baselines are not selected using sealed reference information.
+Gate: deterministic PVT and IMU records with verified time/frame/unit contracts; reproducible splits and provenance; no high-precision influence on development.
 
-## Phase 4 — RTK-free ordinary non-equivariant PINN/self-supervised baseline
+## Phase 3 — deterministic navigation baselines
 
-Build an ordinary non-equivariant encoder connected to a differentiable explicit ESKF, plus a truly independent PINN residual. First hold IMU noise/process assumptions fixed and learn `R`/measurement weights; then assess whether bias or `Q` can be identified. Execute the six mandatory degeneracy/leakage tests.
+Implement SPP-only, pure INS propagation, and one fixed loose-coupled forward ESKF. Validate initialization, lever arm, time synchronization, covariance propagation, and controlled GNSS masking on synthetic fixtures and deployable data. A simple rule-adaptive ESKF is optional and cannot delay the fixed baseline.
 
-Gate: non-reference losses and selection rules are frozen; PINN is not a renamed ESKF identity; copying, covariance inflation, all-GNSS rejection, `Q/R/bias` compensation, route memory, and leakage are directly reported.
+Gate: the fixed ESKF is numerically reliable and is frozen as both teacher and baseline; the pure-IMU outage bridge is reproducible.
 
-## Phase 5 — strictly equivariant IMU model and fair comparison
+## Phase 4 — ordinary RTK-free learned baseline
 
-Introduce the gravity-aware equivariant IMU representation, beginning with `SO(2)`. `O(2)` requires correct reflection treatment of angular-velocity pseudovectors. Compare against both the ordinary non-equivariant network and rotation augmentation under matched capacity, inputs, latency, training budget, seeds, and selection policy.
+Build one ordinary non-equivariant loose-coupled causal student. Train state means from forward-ESKF weak labels plus one independent inertial residual, including causal 20/30-second GNSS masks. Start with the simplest adequate temporal encoder; architecture and training budget are chosen from deployable-only development behavior and compute constraints.
 
-Gate: group actions and transformation/property tests pass; comparison is capacity-matched; independent benefit is stable without sealed-reference selection.
+Mandatory comparisons: teacher ESKF, pure-IMU bridge, and the same student without the physics residual. Do not add tight coupling, joint `Q/R/bias` learning, or a predictive covariance head here.
 
-## Phase 6 — complete model, causal GNSS branch, ablations, and freeze
+Gate: the model runs recursively without teacher inputs; the physics residual is non-tautological; teacher copying, zero correction, route leakage, and numerical failure are reported.
 
-Integrate only separately identifiable components. Compare rule-based GNSS handling, TCN/GRU, and a lightweight causal Transformer fairly; retain the Transformer only for stable independent benefit. Run registered ablations, cross-domain/receiver, degradation, multi-seed, covariance, and all mandatory degeneracy tests. Freeze method, code, configuration, splits, selection rule, seeds, and paper assumptions.
+## Phase 5 — gravity-aware equivariant IMU model
 
-Gate: reproducibility and leakage audits pass and an immutable final-freeze manifest is approved. Only then may the separate final-reference procedure be prepared.
+Implement the `SO(2)` representation and exact property tests. Compare the Phase 4 network with capacity-matched ordinary, rotation-augmented, and `SO(2)` variants while keeping inputs, data, training budget, and selection policy fixed.
 
-## Phase 7 — one sealed RTK evaluation and final reporting
+Gate: the mathematical property test passes and any claimed benefit is separated from capacity and augmentation. `O(2)` remains deferred.
 
-Open the sealed reference once under the approved protocol. Produce statistics, covariance calibration, failure cases, reproducibility package, paper, and final repository review. If any method, code, configuration, split, seed choice, or paper assumption changes after viewing the result, that route becomes development data and a new untouched route is required.
+## Phase 6 — complete primary model and final freeze
+
+Integrate only components that showed independent value. Run the minimum sufficient route/orientation/receiver/degradation experiments and multiple fixed seeds. Freeze the final method, checkpoints, splits, metrics, statistical unit, and claims.
+
+Predictive covariance is added only if the mean-state model is stable and the mentor confirms it as a core deliverable. A causal GNSS time-series branch or tight-coupled extension requires separate controller approval and does not block the primary paper.
+
+Gate: reproducibility and leakage audits pass; all final choices are recorded without viewing sealed reference error.
+
+## Phase 7 — sealed evaluation and reporting
+
+Open the sealed reference once under the frozen protocol. Evaluate the two mentor-defined hypotheses, report failures and limitations, complete the reproduction package, and write the paper.
+
+Gate: no post-reference method change is presented as confirmation. Any changed method requires a new untouched route; otherwise the result is explicitly exploratory.

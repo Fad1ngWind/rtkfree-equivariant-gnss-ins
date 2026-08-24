@@ -1,45 +1,34 @@
-# Mentor consultation and Phase 1 study items
+# Mentor decisions and open questions
 
-MC-001 through MC-005 are work to study, verify from first-party sources, teach to the user, and freeze during Phase 1. They are not answers the user must supply before entering Phase 1. They block the **Phase 1 gate and later implementation**, not Phase 1 start. Phase 1 itself still requires controller acceptance of Phase 0.
+Only decisions that materially change the research claim or deliverable should be sent to the mentor. Dataset fields, implementation constants, and routine engineering choices are resolved from official sources and experiments in their owning Phase.
 
-## MC-001 — Conventional WLS/SPP freeze definition
+## Confirmed mentor direction
 
-- Background: corrections, weighting, integrity checks, time/state fields, satellite count, DOP, and covariance/quality outputs vary by implementation.
-- Options to study: auditable in-project solver; named/versioned official solver; cross-validated dual implementation.
-- Evidence gap: no first-party comparison or approved observation contract exists here.
-- Freeze impact: must be resolved in Phase 1 specification and implemented/verified in Phase 2 before model baselines.
+- Use GNSS and IMU together in the deployed learned estimator.
+- Use a real-time forward GNSS/INS ESKF to create non-RTK weak pseudo-labels.
+- The PINN produces the final navigation result.
+- First make the core GNSS/INS method reliable; do not make ZUPT, NHC, or other vehicle-motion constraints part of the primary method.
+- Evaluate 20-second and 30-second GNSS outages against pure IMU and GNSS-available behavior against ESKF.
+- Loose and tight coupling may both be explored, but the mentor did not require both as simultaneous primary methods.
+- Avoid an unqualified “unsupervised” claim when ESKF pseudo-labels are used.
 
-## MC-002 — Dataset, sensor suite, and route/split protocol
+## Open mentor question
 
-- Background: licensing, clock behavior, route overlap, receiver identity, and urban-canyon diversity affect leakage and generalization.
-- Options to study: route holdout within an official corpus; multi-corpus/domain holdout; new collection with a separately sealed final route.
-- Evidence gap: no formal data was downloaded. UrbanNav version, license, scenario IDs, and official source remain unverified until Phase 2.
-- Freeze impact: Phase 1 defines evaluation rules; Phase 2 confirms official facts and freezes manifests before implementation proceeds.
+### MC-001 — Is predictive covariance a core paper contribution?
 
-## MC-003 — State, group action, and equivariance convention
+The original project vision includes credible uncertainty, but the later mentor messages explicitly confirmed final PINN navigation states without separately confirming a covariance deliverable.
 
-- Background: frames, gravity, group action, invariants, pseudovectors, and observability must be explicit.
-- Preferred starting option: gravity-preserving `SO(2)` yaw equivariance.
-- Conditional option: `O(2)` only if reflections correctly transform angular velocity as a pseudovector. Larger groups require explicit justification.
-- Evidence gap: no first-party derivation or transformation tests yet.
-- Freeze impact: resolve theory in Phase 1; blocks Phase 5 implementation/gate if unresolved.
+The proposed minimal policy is to establish mean-state feasibility first and add predictive covariance in Phase 6 only if it is a required contribution and the mean method is stable.
 
-## MC-004 — Genuinely independent physics-informed residual
+Question for the mentor: should calibrated predictive covariance be a required main contribution, or may it remain a secondary extension after the position/velocity/attitude results are established?
 
-- Background: a PINN residual must add separately stated physics rather than rename the ESKF mechanization identity.
-- Options to study: independent strapdown/kinematic consistency, calibrated innovation physics, or a limited combination with explicit units and observability.
-- Evidence gap: discretization, noise assumptions, loss scale, and non-reference selection protocol are unspecified.
-- Freeze impact: resolve in Phase 1; blocks Phase 4 PINN baseline.
+Freeze impact: this does not block Phase 1 theory or Phases 2–5 mean-state work. It must be resolved before Phase 6 integration.
 
-## MC-005 — Identification, covariance, and selection criteria
+## Conditional later consultation
 
-- Background: joint `Q/R/bias` learning can compensate; covariance inflation, all-GNSS rejection, SPP copying, and unobservable common bias are degenerate solutions.
-- Sequence to study: fixed IMU assumptions and learned `R`/weights first; ordinary non-equivariant IMU plus independent PINN; gravity-aware equivariance; joint adaptation only after identifiability evidence.
-- Evidence gap: no approved non-reference early-stopping or model-selection metric exists.
-- Freeze impact: resolve in Phase 1; mandatory tests run in Phases 3, 4, and 6.
+- Target deployment hardware and latency budget are needed only before Phase 6 runtime claims.
+- Tight coupling is reconsidered only after the loose-coupled baseline is stable; mentor permission to try both is not a current implementation requirement.
 
-## MC-006 — Public license, institutional IP, and patent posture
+## Publication posture
 
-- Owner decision on 2026-08-15: the repository may be publicly visible for personal research management, but it is not open source and remains `All rights reserved`. The existing QQ email may remain in commit metadata.
-- Phase 0 publication scope: infrastructure, governance, tests, and reviewed evidence only. It contains no formal data, scientific model, trained weight, or result.
-- Reopen condition: institutional ownership, patent strategy, dependency licenses, and dataset licenses must be reviewed again before publishing scientific implementation, formal-data-derived material, or results. This later review does not change the present Phase 0 visibility decision.
+The repository may remain publicly visible for personal research management but is not open source and remains `All rights reserved`. Institutional ownership, patent strategy, dependency licenses, and dataset licenses are reviewed again before scientific implementation, data-derived material, or results are published.
