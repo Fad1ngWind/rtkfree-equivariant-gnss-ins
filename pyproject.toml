@@ -1,7 +1,7 @@
 [project]
 name = "rtkfree-equivariant-gnss-ins"
 version = "0.0.0"
-description = "Phase 0 governance and safety infrastructure for RTK-free GNSS/INS research"
+description = "RTK-free equivariant physics-informed GNSS/INS fusion research"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = []

@@ -123,6 +123,7 @@ id_ed25519*
 credentials.json
 
 # Private, conversational, or unreviewed material
+科研手记.md
 private/
 confidential/
 advisor_private/
