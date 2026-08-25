@@ -1,18 +1,19 @@
 # Project status
 
-Last updated: 2026-08-24 (Asia/Shanghai)
+Last updated: 2026-08-26 (Asia/Shanghai)
 
 ## Current gate
 
-- Current phase: Phase 1 **accepted**; Phase 2 has not started
+- Current phase: Phase 2 **accepted**; Phase 3 has not started
 - Infrastructure state: Phase 0 accepted by the controller on 2026-08-15
 - Formal Phase 1 acceptance: **granted by the controller on 2026-08-24**
-- Phase 2 authorization: **not yet granted**
-- Formal data downloaded: no
+- Phase 2 authorization: **granted by the controller after Phase 1 acceptance**
+- Formal Phase 2 acceptance: **granted by the controller on 2026-08-26**
+- Formal data downloaded: yes, only to the approved repository-external WSL-native data root
 - Model code implemented or migrated: no
 - Training performed: no
-- High-precision reference viewed or used: no
-- Canonical project history: the accepted Phase 0 foundation and Phase 1 theory/method specification are committed and synchronized
+- High-precision reference files downloaded, opened, or used: no; the sanitized controlled search-summary deviation is recorded in Phase 2 evidence
+- Canonical project history: the accepted Phase 0 foundation, Phase 1 method specification, and Phase 2 data/SPP baseline are committed and synchronized
 - GitHub publication: `https://github.com/Fad1ngWind/rtkfree-equivariant-gnss-ins` is public under `All rights reserved`; protected `main` is the default branch
 
 ## Frozen direction and claim status

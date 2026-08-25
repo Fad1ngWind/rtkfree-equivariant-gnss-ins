@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "dataset": "UrbanNav",
+  "session": "UrbanNav-HK-Medium-Urban-1",
+  "role": "development",
+  "source_owner": "IPNL-POLYU",
+  "official_repository": "https://github.com/IPNL-POLYU/UrbanNavDataset",
+  "repository_ref": "refs/heads/master",
+  "repository_commit": "075f96b6a6d9252b37486ecb175b4ae690c56f54",
+  "source_checked_on": "2026-08-25",
+  "access_record": "officially-open-source-and-publicly-downloadable-specific-license-text-not-listed",
+  "artifacts": [
+    {
+      "id": "gnss_observation_archive",
+      "kind": "zip",
+      "source_url": "https://www.dropbox.com/sh/2haoy68xekg95zl/AAAkcN4FwhFxkPY1lXsxbJrxa?dl=1",
+      "local_name": "urbannav_hk_medium_urban_1_gnss.zip",
+      "retrieved_at": "2026-08-25",
+      "observed_byte_size": 22526745,
+      "observed_sha256": "b265d9983533b2c038ba2ec46c90a4c078bef5119fef128e6b843af3a1bc5fe2",
+      "selected_member_basenames": [
+        "UrbanNav-HK-Medium-Urban-1.ublox.f9p.splitter.nmea",
+        "UrbanNav-HK-Medium-Urban-1.ublox.f9p.splitter.obs"
+      ],
+      "selection_status": "confirmed_from_deployable_rinex_diagnostics",
+      "selection_evidence": {
+        "rinex_version": 3.03,
+        "time_system": "GPS",
+        "first_epoch": "2021-05-17T02:33:13.006000",
+        "last_epoch": "2021-05-17T02:46:18.006000",
+        "epoch_count": 786,
+        "nominal_interval_s": 1.0,
+        "obvious_gap_count": 0,
+        "pseudorange_satellites_per_epoch": {
+          "min": 21,
+          "median": 27.0,
+          "max": 34
+        },
+        "observed_constellations": [
+          "C",
+          "E",
+          "G",
+          "J",
+          "R",
+          "S"
+        ],
+        "receiver_header_identity_available": false,
+        "antenna_header_identity_available": false
+      }
+    },
+    {
+      "id": "low_cost_imu",
+      "kind": "file",
+      "source_url": "https://www.dropbox.com/s/2rh1rs15ihpf63u/xsense_imu_medium_urban1.csv?dl=1",
+      "local_name": "xsense_imu_medium_urban1.csv",
+      "retrieved_at": "2026-08-25",
+      "observed_byte_size": 109736693,
+      "observed_sha256": "6a3e0ab0209e032296dc750a491e27a4919473c875c5ec8f2dcd1bd3d796537d",
+      "deployable_validation": {
+        "row_count": 314194,
+        "first_sequence": 666379,
+        "last_sequence": 980572,
+        "sequence_discontinuity_count": 0,
+        "missing_sequence_id_count": 0,
+        "sensor_stamp_first_ns": 1621218775548635005,
+        "sensor_stamp_last_ns": 1621219561021894931,
+        "median_interval_ns": 2497911,
+        "nominal_rate_hz": 400.3345195245147,
+        "nonpositive_interval_count": 0,
+        "intervals_over_2x_median_count": 29,
+        "missing_required_vector_value_count": 0,
+        "nonfinite_required_vector_value_count": 0,
+        "frame_id": "/imu"
+      }
+    },
+    {
+      "id": "extrinsic_calibration",
+      "kind": "file",
+      "source_url": "https://raw.githubusercontent.com/IPNL-POLYU/UrbanNavDataset/075f96b6a6d9252b37486ecb175b4ae690c56f54/UrbanNav-HK-Medium-Urban-1/extrinsic.yaml",
+      "local_name": "extrinsic.yaml",
+      "retrieved_at": "2026-08-25",
+      "observed_byte_size": 3069,
+      "observed_sha256": "ab740437b6ede69f41196ca2e89eb99239714b8d1aec57463cfb0e7c9657c916",
+      "selected_key": "ANTENNA_T_IMU",
+      "selected_output_name": "gnss_imu_extrinsic.json",
+      "selection_status": "selected_key_only_deployable",
+      "translation_unit": "m",
+      "unit_basis": "official-file internal ROS transform examples + ROS REP-103",
+      "unit_status": "evidence-backed interpretation; not explicitly annotated beside ANTENNA_T_IMU",
+      "phase2_wls_use": "antenna_phase_center_only",
+      "phase3_direction_check": "minimum coordinate-transform/sign composition test before first lever-arm use",
+      "selected_output_byte_size": 911,
+      "selected_output_sha256": "873d9da5c7957ba0fd61e903275ea5f281dde3baade9517c0555ad1b5ff3f693"
+    },
+    {
+      "id": "imu_calibration",
+      "kind": "file",
+      "source_url": "https://raw.githubusercontent.com/IPNL-POLYU/UrbanNavDataset/075f96b6a6d9252b37486ecb175b4ae690c56f54/UrbanNav-HK-Medium-Urban-1/xsens_imu_param.yaml",
+      "local_name": "xsens_imu_param.yaml",
+      "retrieved_at": "2026-08-25",
+      "observed_byte_size": 750,
+      "observed_sha256": "55da278a30572015d2ab4024ae1dfc11abb1fb54f252498ce318152c6d39ecd5"
+    },
+    {
+      "id": "broadcast_navigation",
+      "kind": "gzip",
+      "source_owner": "BKG IGS Data Center / DLR",
+      "source_url": "https://igs.bkg.bund.de/root_ftp/IGS/BRDC/2021/137/BRDM00DLR_S_20211370000_01D_MN.rnx.gz",
+      "local_name": "BRDM00DLR_S_20211370000_01D_MN.rnx.gz",
+      "coverage_date_utc": "2021-05-17",
+      "format_family": "RINEX 3 mixed broadcast navigation",
+      "acquisition_status": "acquired",
+      "retrieved_at": "2026-08-25",
+      "observed_byte_size": 1244184,
+      "observed_sha256": "904e70cc2b0fe61e2751f216196b7a6f9769d932e8d7868ebffcc3789b012955"
+    }
+  ]
+}
