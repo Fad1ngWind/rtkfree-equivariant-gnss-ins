@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "profile_id": "gps_l1ca_broadcast_spp_v1",
+  "constellations": [
+    "G"
+  ],
+  "observation_code": "C1C",
+  "signal_strength_code": "S1C",
+  "doppler_code": "D1C",
+  "navigation_source": "broadcast_rinex",
+  "coordinate_frame": "WGS84_ECEF_broadcast",
+  "minimum_satellites": 4,
+  "elevation_mask_deg": 5.0,
+  "maximum_iterations": 10,
+  "position_convergence_m": 0.0001,
+  "clock_convergence_m": 0.001,
+  "maximum_ephemeris_age_s": 7200.0,
+  "measurement_sigma_zenith_m": 3.0,
+  "relative_humidity": 0.7,
+  "corrections": {
+    "broadcast_satellite_clock": true,
+    "relativistic_clock": true,
+    "tgd_l1": true,
+    "earth_rotation_sagnac": true,
+    "broadcast_klobuchar": true,
+    "saastamoinen": true,
+    "precise_orbit_or_clock": false,
+    "lever_arm": false
+  },
+  "covariance_method": "inverse_apriori_weighted_normal_matrix",
+  "validity": {
+    "require_healthy_broadcast_ephemeris": true,
+    "require_causal_ephemeris_transmission_time": true,
+    "require_finite_positive_pseudorange": true,
+    "require_full_rank_normal_matrix": true,
+    "require_iteration_convergence": true,
+    "residual_or_truth_tuned_rejection": false
+  },
+  "evidence": {
+    "rinex_3_04": "https://files.igs.org/pub/data/format/rinex304.pdf",
+    "is_gps_200n": "https://www.navcen.uscg.gov/sites/default/files/pdf/gps/IS-GPS-200N.pdf",
+    "rtklib_commit": "71db0ffa0d9735697c6adfd06fdf766d0e5ce807",
+    "rtklib_pntpos": "https://github.com/tomojitakasu/RTKLIB/blob/71db0ffa0d9735697c6adfd06fdf766d0e5ce807/src/pntpos.c",
+    "rtklib_ephemeris": "https://github.com/tomojitakasu/RTKLIB/blob/71db0ffa0d9735697c6adfd06fdf766d0e5ce807/src/ephemeris.c"
+  },
+  "freeze_note": "Chosen before receiver-native PVT cross-check and without high-precision reference access. GPS-only epochs below four usable satellites remain explicit invalid outputs."
+}
