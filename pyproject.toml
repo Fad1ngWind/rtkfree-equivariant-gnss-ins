@@ -8,6 +8,7 @@ dependencies = []
 
 [project.optional-dependencies]
 phase3 = ["numpy==2.5.2"]
+phase4 = ["numpy==2.5.2", "torch==2.13.0+cpu"]
 
 [tool.unittest]
 start-directory = "tests"

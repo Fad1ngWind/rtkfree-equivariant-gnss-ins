@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "profile_id": "ordinary_causal_student_v1",
+  "inputs": {
+    "pvt_sha256": "c0ee6282191a3fc08676e6be32554a9bf3ef0c25b35c22f097e7b93a1b5d0723",
+    "imu_sha256": "c2538e409091452c549c7bd380a6865e125b1adc4fdbd5e3c579dd3ad0c8e516",
+    "teacher_profile_id": "fixed_forward_eskf_v1",
+    "teacher_sha256": "949d8ab68c1db1b29e3285d55da38c777f95465976f85d143751748c59d6b37d",
+    "teacher_role": "training_weak_pseudo_label_only",
+    "teacher_covariance_used": false,
+    "quality_fields": [
+      "used_satellite_count",
+      "postfit_residual_rms_m",
+      "dop.pdop",
+      "dop.hdop",
+      "dop.vdop"
+    ],
+    "prohibited_student_fields": [
+      "absolute_time",
+      "route_identity",
+      "file_identity",
+      "device_identity",
+      "teacher_state",
+      "teacher_covariance"
+    ]
+  },
+  "development_sequence": {
+    "record_count": 764,
+    "initialization_timestamp_ns_utc": 1621218796006000000,
+    "first_output_timestamp_ns_utc": 1621218797006000000,
+    "last_output_timestamp_ns_utc": 1621219560006000000,
+    "split_unit": "chronological_record_index_stop_exclusive",
+    "splits": {
+      "train": [0, 458],
+      "guard_1": [458, 488],
+      "validation": [488, 626],
+      "guard_2": [626, 656],
+      "diagnostic": [656, 764]
+    },
+    "route_generalization_claim_allowed": false
+  },
+  "model": {
+    "architecture": "single_ordinary_gru",
+    "hidden_dim": 32,
+    "imu_feature_dim": 7,
+    "quality_dim": 5,
+    "position_is_recursive_increment": true,
+    "pre_position_increment_scale_n_m": [30.0, 30.0, 10.0],
+    "pre_velocity_output_scale_n_mps": [20.0, 20.0, 10.0],
+    "pre_attitude_increment_scale_rad": [0.1, 0.1, 0.1],
+    "post_correction_scale": [20.0, 20.0, 10.0, 5.0, 5.0, 2.0, 0.15, 0.15, 0.15],
+    "current_gnss_enters_pre_branch": false,
+    "predictive_covariance_head": false,
+    "learned_bias_state": false
+  },
+  "normalization": {
+    "fit_source": "train_split_deployable_fields_only",
+    "method": "median_and_scaled_mad",
+    "minimum_scale": 1e-06,
+    "gnss_innovation_scale_n_m": [50.0, 50.0, 50.0],
+    "previous_velocity_scale_n_mps": [20.0, 20.0, 10.0]
+  },
+  "loss": {
+    "kind": "component_mean_huber",
+    "huber_delta": 1.0,
+    "state_scales": {
+      "position_n_m": [20.0, 20.0, 20.0],
+      "velocity_n_mps": [5.0, 5.0, 5.0],
+      "attitude_rad": [0.2, 0.2, 0.2]
+    },
+    "teacher_covariance_weighting": false,
+    "physics_reference_bias": "fixed_zero",
+    "physics_reference_gradient": "stop_at_inertial_reference",
+    "physics_validity": "exclude_imu_timing_gap_steps"
+  },
+  "controlled_masks": {
+    "interval": "left_closed_right_open",
+    "benchmark_start_after_initialization_s": 120,
+    "durations_s": [20, 30],
+    "training_cycle_s": [0, 20, 30, 0],
+    "training_start_step_within_unroll": 16,
+    "planned_duration_visible_to_student": false
+  },
+  "optimization": {
+    "seed": 3407,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 1e-05,
+    "gradient_norm_clip": 1.0,
+    "unroll_steps": 64,
+    "smoke_optimizer_steps": 4,
+    "development_optimizer_steps": 40,
+    "checkpoint_every_steps": 10,
+    "selection": "minimum_finite_validation_weak_label_state_loss"
+  },
+  "variants": [
+    {
+      "id": "no_physics",
+      "physics_weight": 0.0
+    },
+    {
+      "id": "physics",
+      "physics_weight": 0.1
+    }
+  ],
+  "diagnostics": {
+    "maximum_speed_mps": 60.0,
+    "translation_consistency_tolerance": "float64_structural_audit_1e-9"
+  }
+}
