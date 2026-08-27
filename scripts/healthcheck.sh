@@ -15,16 +15,16 @@ esac
 export PYTHONPATH="$repo_root/src"
 export PYTHONDONTWRITEBYTECODE=1
 
-if ! phase3_runtime="$(python3 -c 'import platform, numpy; print(platform.python_version() + " " + numpy.__version__)' 2>/dev/null)"; then
-  echo "ERROR: activate the locked Phase 3 environment first:" >&2
-  echo "  source ~/rtkfree-venvs/phase3/bin/activate" >&2
+if ! phase4_runtime="$(python3 -c 'import platform, numpy, torch; print(platform.python_version() + " " + numpy.__version__ + " " + torch.__version__ + " " + str(torch.version.cuda))' 2>/dev/null)"; then
+  echo "ERROR: activate the locked Phase 4 environment first:" >&2
+  echo "  source ~/rtkfree-venvs/phase4/bin/activate" >&2
   exit 2
 fi
 
-case "$phase3_runtime" in
-  3.12.*\ 2.5.2) ;;
+case "$phase4_runtime" in
+  3.12.*\ 2.5.2\ 2.13.0+cpu\ None) ;;
   *)
-    echo "ERROR: expected Python 3.12 with NumPy 2.5.2; got $phase3_runtime" >&2
+    echo "ERROR: expected Python 3.12, NumPy 2.5.2, and CPU-only PyTorch 2.13.0; got $phase4_runtime" >&2
     exit 2
     ;;
 esac
