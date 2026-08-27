@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "profile_id": "fixed_forward_eskf_v1",
+  "inputs": {
+    "pvt_profile_id": "gps_l1ca_broadcast_spp_v1",
+    "pvt_sha256": "c0ee6282191a3fc08676e6be32554a9bf3ef0c25b35c22f097e7b93a1b5d0723",
+    "imu_contract_id": "imu_contract_v1",
+    "imu_sha256": "c2538e409091452c549c7bd380a6865e125b1adc4fdbd5e3c579dd3ad0c8e516",
+    "imu_noise_parameter_file": "xsens_imu_param.yaml",
+    "imu_noise_parameter_sha256": "55da278a30572015d2ab4024ae1dfc11abb1fb54f252498ce318152c6d39ecd5",
+    "extrinsic_sha256": "873d9da5c7957ba0fd61e903275ea5f281dde3baade9517c0555ad1b5ff3f693",
+    "source_transform_interpretation": "antenna_from_imu"
+  },
+  "initialization": {
+    "window_s": 20.0,
+    "minimum_horizontal_speed_mps": 2.0,
+    "nominal_vertical_velocity_mps": 0.0,
+    "initial_standard_deviations": {
+      "position": "rotated_standardized_pvt_covariance",
+      "velocity_ned_mps": [2.0, 2.0, 5.0],
+      "attitude_body_rad": [0.17453292519943295, 0.17453292519943295, 0.5235987755982988],
+      "accelerometer_bias_b_mps2": [0.1, 0.1, 0.1],
+      "gyroscope_bias_b_radps": [0.02, 0.02, 0.02]
+    }
+  },
+  "mechanization": {
+    "frame": "per_sequence_fixed_local_NED",
+    "normal_gravity": "somigliana_with_first_order_height_correction",
+    "earth_rotation_compensation": true,
+    "coriolis_compensation": true
+  },
+  "process_noise": {
+    "source": "official_xsens_imu_param_avg_axis",
+    "source_group": "avg-axis",
+    "official_avg_axis": {
+      "acc_n": 1.1197412605492375e-02,
+      "gyr_n": 1.0270904839480961e-02,
+      "acc_w": 1.1751767903346351e-04,
+      "gyr_w": 9.1355383994881894e-05
+    },
+    "continuous_time_interpretation": {
+      "acc_n_unit": "m/s^2/sqrt(Hz)",
+      "gyr_n_unit": "rad/s/sqrt(Hz)",
+      "acc_w_unit": "(m/s^2)/sqrt(s)",
+      "gyr_w_unit": "(rad/s)/sqrt(s)",
+      "qc_diagonal_order": ["acc_n^2_I3", "gyr_n^2_I3", "acc_w^2_I3", "gyr_w^2_I3"],
+      "qd_mapping": "C=L_Qc_Lt; Qd=0.5*(C+Phi_C_Phit)*dt"
+    },
+    "bias_model": "continuous_random_walk"
+  },
+  "position_update": {
+    "measurement_covariance": "rotated_standardized_pvt_covariance",
+    "nis_diagnostic": true,
+    "nis_gate_enabled": false,
+    "adaptive_enabled": false
+  },
+  "controlled_outages": {
+    "start_after_initialization_s": 120,
+    "durations_s": [20, 30],
+    "interval": "left_closed_right_open"
+  }
+}

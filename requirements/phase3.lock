@@ -1,0 +1,10 @@
+# Generated for CPython 3.12 on Ubuntu-24.04 WSL x86_64 with pip 24.0.
+# Command:
+#   python3.12 -m pip download --only-binary=:all: --no-deps numpy==2.5.2
+# Resolved wheel:
+#   numpy-2.5.2-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+--only-binary=:all:
+--require-hashes
+
+numpy==2.5.2 \
+    --hash=sha256:3cdec01fa790a186d430433fdd4d4ffb70eed6f0eeb4bf05c8dbe2dce0a9bcb8

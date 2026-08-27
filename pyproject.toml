@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = []
 
+[project.optional-dependencies]
+phase3 = ["numpy==2.5.2"]
+
 [tool.unittest]
 start-directory = "tests"
 

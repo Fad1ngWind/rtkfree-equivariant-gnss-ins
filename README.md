@@ -4,7 +4,7 @@ RTK-Free Equivariant Physics-Informed GNSS/INS Fusion
 
 本项目面向城市峡谷和 GNSS 退化环境，研究不使用高精度轨迹监督的松耦合 GNSS/INS 融合。系统以常规 WLS/SPP PVT 和低成本 IMU 为输入，使用实时前向 ESKF 提供训练弱标签和传统基线，再由因果 PINN 递归输出位置、速度和姿态。可信预测不确定度作为均值状态稳定后的后续扩展。
 
-项目目前已完成理论设计、数据整理和常规 SPP 基线，下面的方法内容仍是待验证的研究方案。
+项目目前已完成理论设计、数据整理、常规 SPP 和确定性 GNSS/INS 基线，学习方法及其效果仍待后续实验验证。
 
 ## 研究目标
 
@@ -40,6 +40,7 @@ flowchart LR
 - Phase 0 已完成：建立项目目录、运行环境、基础代码结构和测试；
 - Phase 1 已完成：确定了状态与坐标系、弱标签信息流、独立物理残差、`SO(2)` 作用和最小评测方案；
 - Phase 2 已完成：整理了 UrbanNav 的 RINEX 与低成本 IMU，并冻结了可重复生成的常规 GPS 单点定位和标准化数据接口；
+- Phase 3 已完成：建立了 SPP-only、纯 INS、固定前向 ESKF 和可重复的 20/30 秒 GNSS 中断基线；
 - 正式数据和运行结果保存在仓库外，目前还没有开始模型训练；
 - 目前没有可以报告的定位性能结果。
 
@@ -68,12 +69,24 @@ tests/         自动化测试
 
 项目保存在 Windows 的 `E:\rtkfree-equivariant-gnss-ins`，通过 Ubuntu-24.04 WSL 运行：
 
+首次创建仓库外的 Phase 3 锁定环境并安装唯一的科学计算依赖：
+
 ```bash
 cd /mnt/e/rtkfree-equivariant-gnss-ins
+python3.12 -m venv ~/rtkfree-venvs/phase3
+~/rtkfree-venvs/phase3/bin/python -m pip install \
+  -r requirements/phase3.lock
+```
+
+以后每次检查代码时先激活同一环境：
+
+```bash
+cd /mnt/e/rtkfree-equivariant-gnss-ins
+source ~/rtkfree-venvs/phase3/bin/activate
 bash scripts/healthcheck.sh
 ```
 
-当前阶段使用 Python 3.12，暂时没有第三方运行依赖。后续加入科学计算和深度学习库时会同步更新环境说明。
+Phase 0 核心仍无第三方运行依赖；Phase 3 仅增加锁定的 NumPy 2.5.2。当前没有深度学习、CUDA 或大型导航框架依赖。
 
 ## License
 
