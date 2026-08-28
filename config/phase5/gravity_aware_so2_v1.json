@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "profile_id": "gravity_aware_so2_comparison_v1",
+  "base_phase4": {
+    "profile_id": "ordinary_causal_student_v1",
+    "config_path": "config/phase4/ordinary_student_v1.json",
+    "config_sha256": "7d6607edfe38725942ec0a4df6cac77af47d1b41d79a7b376ae30b0c5f1772cd"
+  },
+  "variants": [
+    {
+      "id": "ordinary",
+      "architecture": "phase4_ordinary_causal_student",
+      "rotation_augmentation": false,
+      "strict_so2": false,
+      "physics_weight": 0.0,
+      "trainable_parameter_count": 6994
+    },
+    {
+      "id": "rotation_augmented",
+      "architecture": "phase4_ordinary_causal_student",
+      "rotation_augmentation": true,
+      "strict_so2": false,
+      "physics_weight": 0.0,
+      "trainable_parameter_count": 6994
+    },
+    {
+      "id": "strict_so2",
+      "architecture": "gravity_aware_typed_scalar_vector_student",
+      "rotation_augmentation": false,
+      "strict_so2": true,
+      "physics_weight": 0.0,
+      "trainable_parameter_count": 6780
+    }
+  ],
+  "strict_model": {
+    "scalar_hidden_dim": 30,
+    "vector_hidden_channels": 5
+  },
+  "capacity_control": {
+    "ordinary_parameter_count": 6994,
+    "relative_tolerance": 0.15,
+    "minimum_parameter_count": 5945,
+    "maximum_parameter_count": 8043
+  },
+  "augmentation": {
+    "schedule": "sha256_phase5_yaw_v1_seed_and_zero_based_training_pass",
+    "seed": 3407,
+    "range": "open_minus_pi_to_pi",
+    "one_coordinate_view_per_training_pass": true,
+    "extra_optimizer_steps": 0
+  },
+  "property_test": {
+    "angles_rad": [0.37, -1.11, 2.23],
+    "float64": {
+      "atol": 1e-09,
+      "rtol": 1e-08
+    },
+    "float32": {
+      "atol": 5e-06,
+      "rtol": 5e-05
+    },
+    "identity_required": true,
+    "composition_required": true,
+    "complete_rollout_required": true
+  },
+  "selection": {
+    "checkpoint_every_steps": 10,
+    "rule": "minimum_finite_common_unrotated_validation_weak_label_state_loss"
+  },
+  "matched_phase4_fields": [
+    "inputs",
+    "development_sequence",
+    "normalization",
+    "controlled_masks",
+    "optimization",
+    "loss.kind",
+    "loss.huber_delta",
+    "loss.state_scales",
+    "loss.teacher_covariance_weighting"
+  ],
+  "scope": {
+    "primary_group": "SO(2)",
+    "coordinate_equivariance_only": true,
+    "sensor_remounting_claim": false,
+    "sealed_reference_used": false,
+    "phase4_negative_physics_huber": {
+      "no_physics": 0.374354878,
+      "physics": 0.418493815
+    }
+  }
+}

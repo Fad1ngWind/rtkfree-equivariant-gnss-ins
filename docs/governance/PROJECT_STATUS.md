@@ -1,21 +1,22 @@
 # Project status
 
-Last updated: 2026-08-27 (Asia/Shanghai)
+Last updated: 2026-08-28 (Asia/Shanghai)
 
 ## Current gate
 
-- Current phase: Phase 4 **accepted**; Phase 5 has not started
+- Current phase: Phase 5 **accepted**; Phase 6 has not started
 - Infrastructure state: Phase 0 accepted by the controller on 2026-08-15
 - Formal Phase 1 acceptance: **granted by the controller on 2026-08-24**
 - Phase 2 authorization: **granted by the controller after Phase 1 acceptance**
 - Formal Phase 2 acceptance: **granted by the controller on 2026-08-26**
 - Formal Phase 3 acceptance: **granted by the controller on 2026-08-27**
 - Formal Phase 4 acceptance: **granted by the controller on 2026-08-27**
+- Formal Phase 5 acceptance: **granted by the controller on 2026-08-28**
 - Formal data downloaded: yes, only to the approved repository-external WSL-native data root
-- Model code implemented or migrated: deterministic Phase 3 baselines and one ordinary non-equivariant causal Phase 4 student; no equivariant model yet
-- Training performed: yes, bounded reference-free Phase 4 development training only; no high-precision reference used
+- Model code implemented or migrated: deterministic baselines, the ordinary causal student, its rotation-augmented control, and one typed gravity-aware `SO(2)` student
+- Training performed: yes, bounded reference-free Phase 4 and Phase 5 development training only; no high-precision reference used
 - High-precision reference files downloaded, opened, or used: no; the sanitized controlled search-summary deviation is recorded in Phase 2 evidence
-- Canonical project history: the accepted Phase 0–4 work is the current canonical project history
+- Canonical project history: the accepted Phase 0–5 work is the current canonical project history
 - GitHub publication: `https://github.com/Fad1ngWind/rtkfree-equivariant-gnss-ins` is public under `All rights reserved`; protected `main` is the default branch
 
 ## Frozen direction and claim status
@@ -37,3 +38,7 @@ Preferred terminology is “without high-precision trajectory supervision” or 
 ## Phase 4 result boundary
 
 Phase 4 established a reproducible ordinary causal student and a matched no-physics/physics training comparison using the Phase 3 forward ESKF only as a weak pseudo-label teacher. It passed causality, stability, degeneracy, and artifact-reproduction checks. The physics variant did not improve the independent diagnostic physics residual in this bounded run, so no positive PINN-effect or navigation-performance claim is permitted. Phase 5 must preserve this negative result while testing the separately specified equivariant structure.
+
+## Phase 5 result boundary
+
+Phase 5 implemented capacity-controlled ordinary, rotation-augmented, and typed gravity-aware `SO(2)` students under the same no-physics training setting. The strict architecture passed the complete float64 recursive commutation audit, while its float32 rollout exceeded the preregistered tolerance by approximately `0.30–0.51 mm`; both facts must remain visible. Rotation augmentation had the lowest weak-label validation objective and the strict model did not beat ordinary on that objective, but these are not positioning-accuracy results. No Phase 6 winner has been selected.
