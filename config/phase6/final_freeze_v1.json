@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "profile_id": "phase6_final_freeze_v1",
+  "base_phase4": {
+    "path": "config/phase4/ordinary_student_v1.json",
+    "sha256": "7d6607edfe38725942ec0a4df6cac77af47d1b41d79a7b376ae30b0c5f1772cd"
+  },
+  "base_phase5": {
+    "path": "config/phase5/gravity_aware_so2_v1.json",
+    "sha256": "7556a1585ea456b61331c120b26f548437eefa7e342ed0691dec83abefaa6f59"
+  },
+  "development_data": {
+    "session": "UrbanNav-HK-Medium-Urban-1",
+    "pvt_sha256": "c0ee6282191a3fc08676e6be32554a9bf3ef0c25b35c22f097e7b93a1b5d0723",
+    "imu_sha256": "c2538e409091452c549c7bd380a6865e125b1adc4fdbd5e3c579dd3ad0c8e516",
+    "teacher_sha256": "949d8ab68c1db1b29e3285d55da38c777f95465976f85d143751748c59d6b37d",
+    "extrinsic_sha256": "873d9da5c7957ba0fd61e903275ea5f281dde3baade9517c0555ad1b5ff3f693",
+    "no_new_data": true,
+    "sealed_reference_prohibited": true
+  },
+  "optimization": {
+    "seed_experiment_id": "P6-STRUCTURE-001",
+    "seed_derivation": "sha256_utf8_first_u32_big_endian_mask_31bit",
+    "seeds": [163736869, 188003056, 1899326961],
+    "optimizer_steps": 200,
+    "checkpoint_every_steps": 10,
+    "inherit_phase5_optimizer_and_masks": true,
+    "one_run_per_arm_and_seed": true
+  },
+  "arms": {
+    "structure_no_physics": ["ordinary", "rotation_augmented", "strict_so2"],
+    "physics_weight_values": [0.0, 0.1],
+    "interaction_structures": ["ordinary", "strict_so2"],
+    "reuse_no_physics_for_interaction": true,
+    "conditional_rotation_physics_only_if_selected": true
+  },
+  "selection": {
+    "qualification_gate_first": true,
+    "structure_primary_metric": "common_unrotated_validation_weak_label_composite",
+    "structure_rule": "unique_lowest_three_seed_median_and_at_least_two_of_three_seed_wins_else_ordinary",
+    "physics_secondary_metric": "independent_diagnostic_physics_huber",
+    "physics_rule": "lower_paired_median_and_at_least_two_of_three_improvement_directions_and_validation_median_not_worse",
+    "physics_weight_search_prohibited": true,
+    "designated_checkpoint_seed": 163736869,
+    "final_reproduction_count": 1
+  },
+  "low_quality_stratum": {
+    "role": "deployable_metadata_robustness_report_only",
+    "split": "diagnostic",
+    "valid_pvt_only": true,
+    "union_fields": ["dop.hdop", "postfit_residual_rms_m"],
+    "empirical_quantile": 0.75,
+    "rank_rule": "ceil_q_times_n_one_based_inclusive",
+    "hdop_threshold": 1.827707154949175,
+    "postfit_residual_rms_m_threshold": 32.6901790767606,
+    "valid_epoch_count": 108,
+    "union_epoch_count": 53,
+    "enters_model_selection": false
+  },
+  "scope": {
+    "predictive_covariance": false,
+    "cross_receiver_claim": false,
+    "cross_route_claim": false,
+    "sensor_remounting_claim": false,
+    "rotation_augmented_in_interaction_factorial": false,
+    "truth_accuracy_claim_in_phase6": false
+  }
+}
