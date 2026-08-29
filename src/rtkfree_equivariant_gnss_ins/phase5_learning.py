@@ -26,10 +26,11 @@ def new_phase5_student(
     variant: Phase5Variant,
     phase4_config: Phase4Config,
     phase5_config: Phase5Config,
+    seed: int | None = None,
 ) -> Phase5Student:
     """Create each variant from the same fixed seed and frozen Phase 4 scales."""
 
-    torch.manual_seed(phase4_config.seed)
+    torch.manual_seed(phase4_config.seed if seed is None else seed)
     common = {
         "quality_dim": len(phase4_config.quality_fields),
         "previous_velocity_scale_n_mps": phase4_config.previous_velocity_scale_n_mps,

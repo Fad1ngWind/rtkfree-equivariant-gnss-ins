@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "status": "ACCEPTED_BY_CONTROLLER_2026-08-29",
+  "status_is_not_controller_acceptance": false,
+  "base_head": "d07229e93a5704f7b0b96891afe24bb51f8c85d3",
+  "branch": "codex/phase6-final-freeze",
+  "method_files_sha256": {
+    "config/phase4/ordinary_student_v1.json": "7d6607edfe38725942ec0a4df6cac77af47d1b41d79a7b376ae30b0c5f1772cd",
+    "config/phase5/gravity_aware_so2_v1.json": "7556a1585ea456b61331c120b26f548437eefa7e342ed0691dec83abefaa6f59",
+    "config/phase6/final_freeze_v1.json": "7d6ec6c2995c63d31a57544d2b9baff59d586807dd5fbddb66772d66fda79de0",
+    "scripts/phase6/run_medium_freeze.py": "1d01b91afce75716b7c70531e49173eb884ee3aa5ebc2ea488e1636d4778ba1d",
+    "scripts/phase6/verify_medium_freeze.py": "6903af5c80312b38d52d18ddee1d6f34f10d3c8c3c8ca5f98b2a742b66ca25d4",
+    "src/rtkfree_equivariant_gnss_ins/phase4_learning.py": "06a92711cd3bce4c1e20915d3fbca9dc0bd354faea855506b1bbffa8d4e6363f",
+    "src/rtkfree_equivariant_gnss_ins/phase4_student.py": "18cab3333058b19407dc242fb1f42b3bc0d54d6d1805723f7aebb34a3860fcc8",
+    "src/rtkfree_equivariant_gnss_ins/phase5_augmentation.py": "127c1573abc93dbf528edc9514a66faebb7fc9a8f49bc9653465b98509206df5",
+    "src/rtkfree_equivariant_gnss_ins/phase5_learning.py": "4ea49978234ea08a83e552187d238f26f5d91ee58de3ccdafcba2b499ee7cae5",
+    "src/rtkfree_equivariant_gnss_ins/phase5_student.py": "f4dd8d2e5b6d811bd72a66a6ab42c7adff2e5ab681850669223d4712941ac98e",
+    "src/rtkfree_equivariant_gnss_ins/phase6_config.py": "0108abf73092b522f31864bed2f2e6b3da76bdeb9d6349856198c14002ee521e",
+    "src/rtkfree_equivariant_gnss_ins/phase6_diagnostics.py": "5907dde11426217a0703c5c53ea8414c8e833db8803bcdabae0aa15365a35934",
+    "src/rtkfree_equivariant_gnss_ins/phase6_selection.py": "7a930c96ab5b4719b36e02b4be1cf66460b269f2c5af940fe79d0fe65a13afeb",
+    "src/rtkfree_equivariant_gnss_ins/phase6_validate.py": "70ba4505795fd00939833212dcba866b6e012161d60ebbf2613b1a4edd55d404"
+  },
+  "decision_files_sha256": {
+    "docs/governance/EXPERIMENT_REGISTRY.md": "8d9760d40db3940e7d6f79eb5a93f57548a40d1330c011c93c11da5b2c973a0b",
+    "docs/governance/MENTOR_CONSULTATIONS.md": "b89bcf0423b68e50c70d58a53327d68d337285d6b0cfdb716c9d58da8c0d66a2",
+    "docs/phase6/PHASE6_DECISION_AND_EXPERIMENT_CONTRACT.md": "8a54f969c7d09695a30a7eaa22cbb781b7758df421b240faf465c5a921b0ce1e",
+    "docs/phase6/PHASE7_SEALED_EVALUATION_PROTOCOL.md": "082337e51cf4eae0153ddbcfca4f977b2eb46de42828c20cbc2b95cb532ab97b"
+  },
+  "data_roles": {
+    "development": "UrbanNav-HK-Medium-Urban-1 deployable PVT/IMU/extrinsic only",
+    "weak_label": "frozen Phase 3 forward ESKF means only",
+    "sealed_holdout": "UrbanNav-HK-Deep-Urban-1; no content acquired or opened",
+    "high_precision_reference_used": false,
+    "receiver_native_pvt_used_as_truth": false,
+    "teacher_covariance_used": false,
+    "new_receiver_or_route_data_used": false
+  },
+  "execution": {
+    "external_run_id": "~/rtkfree-runs/phase6/medium_final_freeze_user_20260828",
+    "summary_sha256": "54dec97a895772df171c31d2dcee9de178853c31158c9f620e27bb8750112718",
+    "normalizer_sha256": "f08d10ab35c1bd909296fe0bdca6169bf068b9cc3168730e03de1a6c019ace0b",
+    "seeds": [163736869, 188003056, 1899326961],
+    "optimizer_steps": 200,
+    "checkpoint_cadence": 10,
+    "bounded_training_freeze": true,
+    "budget_posthoc_extension_prohibited": true,
+    "required_training_run_count": 15,
+    "conditional_rotation_physics_run_count": 0,
+    "final_reproduction_count": 1,
+    "read_only_verifier_artifact_count": 81
+  },
+  "deployment_primary": {
+    "arm_id": "ordinary_p01",
+    "structure": "ordinary",
+    "physics_weight": 0.1,
+    "seed": 163736869,
+    "best_optimizer_step": 200,
+    "best_step_is_budget_boundary": true,
+    "optimization_convergence_established": false,
+    "external_checkpoint": "runs/ordinary_p01/seed_163736869/best.pt",
+    "checkpoint_file_sha256": "a7d9ddc8d7caaa5764062e2a6a62bbbffec697c21c88401c66105306e1568d9f",
+    "checkpoint_tensor_sha256": "bf4fc42ca6eb5b8a7acb90c7e3d59eda6b65e27868e8e74cec257ef00dc8fb44",
+    "training_log_sha256": "db7d0e90c73748f5bafa331a28c5566e577bd4a001245f31ca26fcad4b745e9e"
+  },
+  "reproduction": {
+    "external_checkpoint": "reproduction/best.pt",
+    "checkpoint_file_sha256": "a7d9ddc8d7caaa5764062e2a6a62bbbffec697c21c88401c66105306e1568d9f",
+    "checkpoint_tensor_sha256": "bf4fc42ca6eb5b8a7acb90c7e3d59eda6b65e27868e8e74cec257ef00dc8fb44",
+    "training_log_sha256": "db7d0e90c73748f5bafa331a28c5566e577bd4a001245f31ca26fcad4b745e9e",
+    "exact_match": true
+  },
+  "phase7_frozen_arms": {
+    "checkpoint_index": "execution.summary_sha256 fixes every arm/seed checkpoint tensor hash in external summary.json",
+    "ordinary_no_physics": true,
+    "ordinary_physics": true,
+    "strict_so2_no_physics": true,
+    "strict_so2_physics": true,
+    "rotation_augmented_no_physics_control": true,
+    "rotation_augmented_physics": false
+  },
+  "allowed_phase6_claims": [
+    "all registered runs passed causal, finite, nondegenerate deployable-only gates",
+    "ordinary plus physics_weight 0.1 was selected by the prospective RTK-free proxy rules",
+    "strict SO(2) passed the float64 structural audit and failed the float32 deployed-rollout tolerance",
+    "the RTK-free 2x2 interaction directions were mixed"
+  ],
+  "prohibited_claims": [
+    "truth-referenced positioning accuracy or superiority",
+    "general physics or strict-SO2 benefit",
+    "predictive covariance or calibrated uncertainty",
+    "cross-route, cross-receiver, device, or sensor-remounting generalization",
+    "practical significance or broad superiority from the single sealed route/session"
+  ],
+  "phase7_protocol": {
+    "path": "docs/phase6/PHASE7_SEALED_EVALUATION_PROTOCOL.md",
+    "sealed_route": "UrbanNav-HK-Deep-Urban-1",
+    "reference_bearing_invocation_count": 1,
+    "outage_durations_s": [20, 30],
+    "outage_start_targets_s": [120, 180, 240, 300, 360, 420, 480, 540],
+    "outage_primary_metric": "horizontal_relative_displacement_endpoint_error_m",
+    "gnss_available_primary_metric": "horizontal_position_rmse_m",
+    "field_statistical_unit": "route_session_n_equals_1",
+    "algorithmic_replicates": "three_fixed_seeds",
+    "directional_comparison_threshold_m": 0.0,
+    "directional_threshold_role": "within_session_descriptive_error_direction_only",
+    "practical_significance_claim": false,
+    "route_generalization_claim": false,
+    "broad_superiority_claim": false,
+    "inferential_confidence_interval": false,
+    "minimum_outage_blocks_per_duration": 6,
+    "minimum_gnss_available_aligned_epochs": 300,
+    "minimum_gnss_available_span_s": 300,
+    "reference_ranking_may_replace_primary": false
+  },
+  "phase7_change_rule": "After any sealed reference is accessed, no method, code, config, checkpoint, seed, metric, statistical unit, arm role, or claim-selection rule may change. Reference ranking cannot replace the deployment primary."
+}

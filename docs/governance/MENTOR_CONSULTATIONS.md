@@ -12,7 +12,7 @@ Only decisions that materially change the research claim or deliverable should b
 - Loose and tight coupling may both be explored, but the mentor did not require both as simultaneous primary methods.
 - Avoid an unqualified “unsupervised” claim when ESKF pseudo-labels are used.
 
-## Open mentor question
+## Resolved mentor question
 
 ### MC-001 — Is predictive covariance a core paper contribution?
 
@@ -22,7 +22,7 @@ The proposed minimal policy is to establish mean-state feasibility first and add
 
 Question for the mentor: should calibrated predictive covariance be a required main contribution, or may it remain a secondary extension after the position/velocity/attitude results are established?
 
-Freeze impact: this does not block Phase 1 theory or Phases 2–5 mean-state work. It must be resolved before Phase 6 integration.
+Decision relayed by the user on 2026-08-28: the mentor said predictive covariance may be deferred. Phase 6 therefore freezes a causal position/velocity/attitude mean-state method only. It will not add a covariance head, covariance loss, calibration metric, or uncertainty claim. Predictive covariance is future work.
 
 ## Conditional later consultation
 
